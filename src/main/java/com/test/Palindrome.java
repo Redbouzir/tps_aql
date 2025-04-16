@@ -14,7 +14,7 @@ public class Palindrome {
             }
             j--;
             i++;
-            //this is tes
+            //this is tesgjfgkd
         }
         return true;
     }
