@@ -1,0 +1,3 @@
+com\test\BranchCoverageTest\PalindromeTest.class
+com\test\LineCoverageTest\PalindromeTest.class
+com\test\ConditionCoverageTest\PalindromeTest.class
