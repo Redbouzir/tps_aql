@@ -2,6 +2,7 @@ package com.example.taskmanager;
 
 import com.example.taskmanager.model.Task;
 import com.example.taskmanager.repository.TaskRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,7 +28,8 @@ public class TaskControllerIntegrationTest {
     private static final MySQLContainer<?> mysql = new MySQLContainer<>("mysql:8.0.30")
             .withDatabaseName("testdb")
             .withUsername("test")
-            .withPassword("test");
+            .withPassword("test")
+            .withReuse(true);
 
     @LocalServerPort
     private int port;
@@ -43,6 +45,12 @@ public class TaskControllerIntegrationTest {
         registry.add("spring.datasource.url", mysql::getJdbcUrl);
         registry.add("spring.datasource.username", mysql::getUsername);
         registry.add("spring.datasource.password", mysql::getPassword);
+        registry.add("spring.datasource.driver-class-name", mysql::getDriverClassName);
+    }
+
+    @BeforeEach
+    void setUp() {
+        taskRepository.deleteAll();
     }
 
     @Test
